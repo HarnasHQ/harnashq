@@ -159,7 +159,10 @@ export function teaser(el, stage, { still = false, strength = () => 1 } = {}) {
   scene.add(mark);
   const parts = [];
   const fit = { size: v3(1.6, 2.1, 0.3), centre: v3(0, -0.05, 0) };
-  let ready = false, t0 = 0, W = 0, H = 0, raf = 0;
+  let ready = false, fitMs = 0, last = 0, seen = false, W = 0, H = 0, raf = 0;
+  // the fitting runs on its own clock: it only advances while the stage is on screen, and never by
+  // more than two frames at once, so a slow first frame (a phone compiling shaders) cannot skip it
+  new IntersectionObserver((es) => { seen = es[0].intersectionRatio >= 0.35; }, { threshold: [0, 0.35, 0.6] }).observe(stage);
 
   function resize() {
     const w = el.clientWidth, h = el.clientHeight;
@@ -184,8 +187,10 @@ export function teaser(el, stage, { still = false, strength = () => 1 } = {}) {
   }
 
   function pose(now) {
-    const a = still ? 1 : outCubic(clamp01((now - t0) / FIT_MS));
-    const loose = still ? 0 : 1 - clamp01((now - t0) / FIT_MS);
+    if (!still && last && seen) fitMs += Math.min(34, now - last);
+    last = now;
+    const a = still ? 1 : outCubic(clamp01(fitMs / FIT_MS));
+    const loose = still ? 0 : 1 - clamp01(fitMs / FIT_MS);
     for (const p of parts) {
       const k = smooth(clamp01((a - p.w[0]) / (p.w[1] - p.w[0])));
       p.n.position.lerpVectors(p.pos1, p.pos0, k);
@@ -237,7 +242,7 @@ export function teaser(el, stage, { still = false, strength = () => 1 } = {}) {
       mark.updateMatrixWorld(true);
       const box = new THREE.Box3().setFromObject(mark);
       box.getSize(fit.size); box.getCenter(fit.centre);
-      const go = () => { ready = true; t0 = performance.now(); draw(t0); };
+      const go = () => { ready = true; last = 0; draw(performance.now()); };
       (renderer.compileAsync ? renderer.compileAsync(scene, camera) : Promise.resolve()).then(go, go);
     }));
   }); });
