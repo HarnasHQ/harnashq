@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://formspree.io; form-action https://formspree.io; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>HARNAS</title>
+<meta name="description" content="HARNAS is launching soon.">
+<link rel="icon" href="brand/harnas-mark.svg">
+<link rel="preload" as="font" type="font/woff2" href="fonts/archivo-latin.woff2" crossorigin>
+<link rel="stylesheet" href="gate.css">
+</head>
+<body>
+<canvas id="ground" aria-hidden="true"></canvas>
+<p class="brand"><svg viewBox="0 0 100 108" aria-hidden="true"><use href="#mark"/></svg>HARNAS</p>
+<main class="gate">
+  <h1 data-t="h">Launching soon.</h1>
+  <p class="sub" data-t="sub">Want to know when?</p>
+  <form class="form" id="wait-form" method="post" action="https://formspree.io/f/xvkkonpn">
+    <label class="sr-only" for="w-email" data-t="email">Your email</label>
+    <input type="email" id="w-email" name="email" required autocomplete="email" placeholder="you@firm.nl">
+    <input type="hidden" name="_subject" value="HARNAS waitlist">
+    <input type="hidden" name="language" id="w-lang">
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
+    <button class="btn" type="submit" data-t="cta">Join the waitlist</button>
+  </form>
+  <p class="msg" id="msg" aria-live="polite"></p>
+</main>
+<div class="stage" id="stage" aria-hidden="true"></div>
+<footer class="legal"><a href="privacy-en.html" data-privacy data-t="privacy">Privacy statement</a><span data-t="legal">No cookies, no trackers</span><span>© 2026 HARNAS</span></footer>
+<svg width="0" height="0" class="defs" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 100 108"><g fill="currentColor">
+    <path d="M48.5 25 L36 7 L11 12.5 Q22 23 19.5 34 L24.5 63 L48.5 71 Z"/>
+    <path d="M51.5 25 L64 7 L89 12.5 Q78 23 80.5 34 L75.5 63 L51.5 71 Z"/>
+    <path d="M25.5 68.5 L50 76.5 L74.5 68.5 L72.5 77 L50 85 L27.5 77 Z"/>
+    <path d="M29.5 82.5 L50 89.5 L70.5 82.5 L68.5 91 L50 98 L31.5 91 Z"/>
+    <path d="M34 96 L50 101.5 L66 96 L64 103 L50 108 L36 103 Z"/>
+  </g></symbol>
+</svg>
+<script type="module" src="gate.js"></script>
+</body>
+</html>

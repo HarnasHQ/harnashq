@@ -1,0 +1,62 @@
+/* HARNAS holding page. One screen: the mark, one line, one field. */
+@font-face { font-family: "Archivo"; src: url("fonts/archivo-latin.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Archivo"; src: url("fonts/archivo-latin-ext.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+:root { --night: #07080B; --night-2: #12151B; --steel: #C8CED8; --steel-soft: #9EA6B3; --blue: #2B50E0; --blue-hi: #6F8BFF; --white: #FFFFFF; --ink: #0E1014; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--night); color: var(--white); font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; font-size: 1.125rem; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+h1, p { margin: 0; }
+svg { display: block; }
+.defs { position: absolute; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+:focus-visible { outline: 3px solid var(--blue-hi); outline-offset: 3px; }
+
+.brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; letter-spacing: 0.06em; }
+.brand svg { width: 24px; }
+
+/* the waitlist: the mark in steel on the right as the ground of the page, the type over the night on the left */
+:root { --margin: clamp(16px, 2.6vw, 40px); --step-display: clamp(3rem, 0.6rem + 11.4vw, 12.5rem); --step-lead: clamp(1.375rem, 1.05rem + 1vw, 2.25rem); }
+#ground { display: none; position: fixed; inset: 0; width: 100vw; height: 100lvh; z-index: 0; pointer-events: none; }
+.gl #ground { display: block; }
+body > .brand, .gate, .legal { position: relative; z-index: 1; }
+body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100svh; }
+body > .brand { padding: 20px var(--margin); }
+.gate { align-self: center; padding: 6svh var(--margin); max-width: 54vw; }
+h1 { font-size: var(--step-display); font-weight: 700; font-stretch: 76%; line-height: 0.86; letter-spacing: -0.035em; max-width: 7ch; }
+.sub { margin-top: 32px; font-size: var(--step-lead); line-height: 1.2; letter-spacing: -0.015em; color: var(--white); }
+.form { margin-top: 32px; display: flex; gap: 16px; align-items: end; flex-wrap: wrap; max-width: 36rem; }
+.form input[type="email"] { flex: 1 1 15rem; min-height: 3.25rem; padding: 0.55rem 0; border: 0; border-bottom: 1px solid var(--steel-soft); border-radius: 0; background: transparent; color: var(--white); font: inherit; transition: border-color 180ms ease; }
+.form input[type="email"]::placeholder { color: var(--steel-soft); }
+.form input[type="email"]:focus { outline: none; border-bottom: 2px solid var(--blue-hi); }
+.btn { min-height: 3.25rem; padding: 0 1.5rem; border: 0; background: var(--blue); color: var(--white); font: inherit; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background-color 180ms ease, transform 140ms cubic-bezier(0.22, 1, 0.36, 1); }
+.btn:hover { background: #3A5FF2; }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { cursor: default; }
+.msg { margin-top: 0.75rem; min-height: 1.5em; color: var(--steel); }
+.stage { position: absolute; top: 5svh; right: 6vw; width: 42vw; height: 88svh; pointer-events: none; }
+.legal { display: grid; gap: 6px; justify-items: end; text-align: right; padding: 0 var(--margin) 28px; font-size: 1rem; color: var(--steel); }
+.legal a { color: var(--white); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.2em; transition: text-decoration-color 180ms ease; }
+.legal a:hover { text-decoration-color: currentColor; }
+
+/* phone: the words and the field first, the mark below them */
+@media (max-width: 760px) {
+  :root { --step-display: clamp(2.75rem, 14.4vw, 3.5rem); }
+  body { grid-template-rows: auto auto 1fr auto; }
+  .gate { align-self: start; max-width: none; padding-top: 4svh; }
+  .sub { margin-top: 20px; }
+  .form { margin-top: 20px; }
+  .form .btn { flex: 1 1 100%; }
+  .stage { position: static; width: auto; height: auto; min-height: 30svh; margin: 0 var(--margin); }
+  .legal { justify-items: start; text-align: left; padding-top: 12px; }
+}
+
+/* text pages */
+.doc { max-width: 46rem; padding: 64px clamp(16px, 4vw, 48px) 120px; }
+.doc h1 { max-width: none; margin: 48px 0 32px; font-size: clamp(2rem, 1rem + 4vw, 4rem); }
+.doc h2 { font-size: 1.5rem; margin: 40px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
+.doc p + p { margin-top: 1em; }
+.doc a { color: var(--white); }
+.doc .small { font-size: 1rem; color: var(--steel-soft); }
