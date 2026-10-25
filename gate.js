@@ -25,7 +25,7 @@ form.addEventListener('submit', async (e) => {
   const btn = form.querySelector('[type=submit]'); btn.disabled = true;
   try {
     const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-    if (res.ok) { msg.textContent = T.sent[i]; form.email.value = ''; btn.disabled = false; return; }
+    if (res.ok) { msg.textContent = T.sent[i]; form.email.value = ''; btn.disabled = false; window.turnstile?.reset(); return; }
     // The form service refused the script (spam check on, rate limit, outage): hand it to the
     // browser instead, which posts the form normally and lets the service show its own check.
     if (res.status === 403 || res.status === 429 || res.status >= 500) { form.submit(); return; }

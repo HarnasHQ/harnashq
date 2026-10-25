@@ -35,6 +35,9 @@ h1 { font-size: var(--step-display); font-weight: 700; font-stretch: 76%; line-h
 .btn:hover { background: #3A5FF2; }
 .btn:active { transform: scale(0.97); }
 .btn:disabled { cursor: default; }
+/* the human check: invisible unless Cloudflare needs an interaction, then a full row under the field */
+.cf-turnstile { flex: 1 1 100%; }
+.cf-turnstile:empty { display: none; }
 .msg { margin-top: 0.75rem; min-height: 1.5em; color: var(--steel); }
 .stage { position: absolute; top: 5svh; right: 6vw; width: 42vw; height: 88svh; pointer-events: none; }
 .legal { display: grid; gap: 6px; justify-items: end; text-align: right; padding: 0 var(--margin) 28px; font-size: 1rem; color: var(--steel); }

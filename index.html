@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://formspree.io; form-action https://formspree.io; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://formspree.io; form-action https://formspree.io; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>HARNAS</title>
 <meta name="description" content="HARNAS is launching soon.">
 <link rel="icon" href="brand/harnas-mark.svg">
 <link rel="preload" as="font" type="font/woff2" href="fonts/archivo-latin.woff2" crossorigin>
 <link rel="stylesheet" href="gate.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 <canvas id="ground" aria-hidden="true"></canvas>
@@ -24,6 +25,7 @@
     <input type="hidden" name="language" id="w-lang">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
     <button class="btn" type="submit" data-t="cta">Join the waitlist</button>
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAFllhifCZD5GIicB" data-action="waitlist" data-theme="dark" data-appearance="interaction-only"></div>
   </form>
   <p class="msg" id="msg" aria-live="polite"></p>
 </main>
